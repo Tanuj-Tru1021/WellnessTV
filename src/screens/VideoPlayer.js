@@ -13,6 +13,8 @@ const VideoPlayer = ({ route, navigation }) => {
     const [pause, setPause] = useState(false)
     const [progress, setProgress] = useState(null)
     const [fullscreen, setFullscreen] = useState(false)
+    const [isMuted, setIsMuted] = useState(false)
+    const [isPip, setIsPip] = useState(false)
     const videoRef = useRef(null)
     const videoPlay = () => {
         if (videoRef.current) {
@@ -24,22 +26,29 @@ const VideoPlayer = ({ route, navigation }) => {
         let secs = (Math.trunc(seconds) % 60).toString().padStart(2, '0')
         return `${mins}:${secs}`
     }
+    setTimeout(()=>{
+        if(clicked && !pause) {
+            setClicked(false)
+        }
+    }, 5000)
     return (
         <View style={{ flex: 1 }}>
-            <Header
+            {fullscreen === false ? <Header
                 isHome={false}
                 onPressBack={() => navigation.goBack()}
                 onPressHome={() => navigation.navigate('Home')}
-            />
+            /> : ""}
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black' }}>
                 <TouchableOpacity
                     style={{ width: '100%', height: fullscreen ? "100%" : 300 }}
                     onPress={() => setClicked(true)}
+                    activeOpacity={1}
                 >
                     <Video
                         ref={videoRef}
                         paused={pause}
-                        pictureInPicture={true}
+                        muted={isMuted}
+                        pictureInPicture={isPip}
                         source={{ uri: videoURL }}
                         onLoad={() => {
                             videoPlay()
@@ -48,9 +57,9 @@ const VideoPlayer = ({ route, navigation }) => {
                         style={{ width: '100%', height: fullscreen ? '100%' : 300 }}
                     />
                     {
-                        clicked && <TouchableOpacity 
-                        style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: 'rgba(0,0,0,0.3)', justifyContent: 'center', alignItems: 'center' }}
-                        onPress={() => setClicked(false)}
+                        clicked && <TouchableOpacity
+                            style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: 'rgba(0,0,0,0.3)', justifyContent: 'center', alignItems: 'center' }}
+                            onPress={() => setClicked(false)}
                         >
                             <View style={{ flexDirection: 'row' }}>
                                 <TouchableOpacity onPress={() => {
@@ -91,14 +100,39 @@ const VideoPlayer = ({ route, navigation }) => {
                                 </Text>
                             </View>
                             <View style={{
-                                width:'100%', flexDirection:'row', position:'absolute', top: 10, paddingHorizontal: 20
-                            }}> 
-                            <TouchableOpacity onPress={() => {
-                                fullscreen ? Orientation.lockToPortrait() : Orientation.lockToLandscape()
-                                setFullscreen(!fullscreen)
+                                width: '100%', position: 'absolute', top: fullscreen ? 10 : 30, paddingHorizontal: 20
                             }}>
-                                <Ionicon name={fullscreen ? "contract" : "expand"} size={40} color={'white'} />
-                            </TouchableOpacity>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <TouchableOpacity onPress={() => {
+                                            if (fullscreen) {
+                                                Orientation.lockToPortrait()
+                                            } else {
+                                                Orientation.lockToLandscape()
+                                            }
+                                            setFullscreen(!fullscreen)
+                                        }}>
+                                            <Ionicon name={fullscreen ? "contract" : "expand"} size={40} color='white' />
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={{ marginHorizontal: 10 }}
+                                            onPress={() => {
+                                                setIsPip(!isPip)
+                                            }}
+                                        >
+                                            <Ionicon name="copy-outline" size={40} color="white" />
+                                        </TouchableOpacity>
+                                    </View>
+
+                                    <TouchableOpacity onPress={() => {
+                                        setIsMuted(!isMuted)
+                                    }}>
+                                        {
+                                            isMuted ? <Ionicon name="volume-mute-outline" size={40} color="white" /> :
+                                                <Ionicon name="volume-medium-outline" size={40} color="white" />
+                                        }
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </TouchableOpacity>
                     }

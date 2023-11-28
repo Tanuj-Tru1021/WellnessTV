@@ -2,7 +2,7 @@ import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Header from '../components/Header'
 
-const Details = ({ route, navigation }) => {
+const CollectionsDetails = ({ route, navigation }) => {
 
   const { collections } = route.params
   const imageURL = 'https:' + collections.image.fields.file.url
@@ -13,12 +13,8 @@ const Details = ({ route, navigation }) => {
         isHome={false}
         Title={collections.name}
         onPressBack={() => navigation.goBack()}
-        onPressHome={() => navigation.navigate('Home')}
+        onPressHome={() => navigation.navigate('WellnessTV')}
       />
-
-      {/* {
-        console.log(collections.videos[0].fields.image.sys.id)
-      } */}
       <FlatList
         data={collections.videos}
         keyExtractor={item => item.fields.image.sys.id}
@@ -68,4 +64,4 @@ const Details = ({ route, navigation }) => {
   )
 }
 
-export default Details
+export default CollectionsDetails

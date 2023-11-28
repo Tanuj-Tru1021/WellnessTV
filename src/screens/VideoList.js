@@ -37,7 +37,7 @@ const VideoList = ({ route, navigation }) => {
                 isHome={false}
                 Title={'VideoList Page'}
                 onPressBack={() => navigation.goBack()}
-                onPressHome={() => navigation.navigate('Home')}
+                onPressHome={() => navigation.navigate('WellnessTV')}
             />
             <FlatList
                 data={category}
@@ -68,7 +68,7 @@ const VideoList = ({ route, navigation }) => {
                     )
                 }}
                 ListEmptyComponent={(
-                    <View>
+                    <View style={{marginTop: 20}}>
                         <ActivityIndicator size={'large'} color={'black'} />
                     </View>
                 )}

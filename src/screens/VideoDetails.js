@@ -20,7 +20,7 @@ const VideoDetails = ({ route, navigation }) => {
                 isHome={false}
                 Title={'Video Details'}
                 onPressBack={() => navigation.goBack()}
-                onPressHome={() => navigation.navigate('Home')}
+                onPressHome={() => navigation.navigate('WellnessTV')}
             />
             {/* <View style={{ flex: 1, justifyContent: 'space-between' }}> */}
             <View>
