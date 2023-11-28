@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import useRequest from '../hooks/useRequest'
 import Header from '../components/Header'
@@ -20,12 +20,20 @@ const Home = ({ navigation }) => {
     setCategory(a)
   }
   const fetchAPI = async () => {
-    const URL = 'https://devapi.thewellnesscorner.com/wellness-tv/collections'
-    const CategoryURL = 'https://devapi.thewellnesscorner.com/wellness-tv/categories'
+
+    const CollectionsURL_endPoint = 'wellness-tv/collections'
+    const CategoryURL_endPoint = 'wellness-tv/categories'
     const method = "GET"
     const body = {}
-    await makeRequest(CategoryURL, method, body, setterCategories)
-    await makeRequest(URL, method, body, setterItem)
+    const token = await AsyncStorage.getItem('token')
+    const legacyToken = await AsyncStorage.getItem('legacyToken')
+    const headers = {
+      'x-access-token': token,
+      'Authorization': `Bearer ${legacyToken}`,
+      ...headers
+    }
+    await makeRequest(CategoryURL_endPoint, method, body, headers, setterCategories)
+    await makeRequest(CollectionsURL_endPoint, method, body, headers, setterItem)
     // console.log(item[0].fields.image.fields.file.url)
     // console.log(category.items[0].fields.image.fields.file.url)
   }
@@ -44,7 +52,7 @@ const Home = ({ navigation }) => {
       <Header
         isHome={true}
         Title={'Wellness TV'}
-        onPressLogout={logout()}
+        onPressLogout={logout}
       />
       <FlatList
         data={category.items}
@@ -71,6 +79,11 @@ const Home = ({ navigation }) => {
             </View>
           )
         }}
+        ListEmptyComponent={(
+          <View style={{ marginTop: 16, padding: 8 }}>
+            <ActivityIndicator size={'large'} color={'black'} />
+          </View>
+        )}
         ListFooterComponent={(
           <FlatList
             data={item}
@@ -95,6 +108,11 @@ const Home = ({ navigation }) => {
                 </View>
               )
             }}
+            ListEmptyComponent={(
+              <View style={{ padding: 8, marginTop: 16 }}>
+                <ActivityIndicator size={'large'} color={'black'} />
+              </View>
+            )}
           />
         )}
       />

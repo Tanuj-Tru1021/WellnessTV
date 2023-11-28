@@ -8,6 +8,7 @@ import Home from './screens/Home'
 import Details from './screens/Details'
 import VideoList from './screens/VideoList'
 import VideoDetails from './screens/VideoDetails'
+import VideoPlayer from './screens/VideoPlayer'
 
 const Stack = createStackNavigator()
 
@@ -24,6 +25,7 @@ const Navigator = () => {
         <Stack.Screen name='Details' component={Details} />
         <Stack.Screen name='VideoList' component={VideoList} />
         <Stack.Screen name='VideoDetails' component={VideoDetails} />
+        <Stack.Screen name='VideoPlayer' component={VideoPlayer} />
       </Stack.Navigator>
     </NavigationContainer>
   )

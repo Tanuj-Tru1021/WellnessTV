@@ -1,16 +1,20 @@
 import axios from "axios";
+import { BASE_URL } from "../constants/Util";
  
 const useRequest = () => {
  
-    const makeRequest = async (BASE_URL, method, body, setter) => {
+    const makeRequest = async (endPoint, method, body, headers, setter) => {
       
-        console.log(BASE_URL, method, body, setter)
+        console.log(BASE_URL+endPoint, method, body, setter)
         try {
             // console.log(BASE_URL,"url")
             const request = {
                 method: method,
-                url: BASE_URL,
-                data: body
+                url: BASE_URL+endPoint,
+                data: body,
+                headers: {
+                    headers
+                }
             }
             const response = await axios(request)
             // console.log(response.data)

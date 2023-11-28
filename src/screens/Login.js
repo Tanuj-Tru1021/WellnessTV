@@ -29,16 +29,16 @@ const Login = ({ navigation }) => {
 
   const getData = async () => {
 
-    const URL = 'https://devapi.thewellnesscorner.com/auth/login'
+    const URL_endPoint = 'auth/login'
     const method = 'POST'
     const body = {
       "email": credentials.email,
       "password": credentials.password
     }
 
-    await makeRequest(URL, method, body, setter)
-    setToken(data.token)
-    setLegacyToken(data.legacyToken)
+    await makeRequest(URL_endPoint, method, body, setter)
+    setToken(data && data.token)
+    setLegacyToken(data && data.legacyToken)
     await AsyncStorage.setItem("token", token)
     await AsyncStorage.setItem("legacyToken", legacyToken)
 
@@ -121,15 +121,17 @@ const Login = ({ navigation }) => {
         {error.password && <RenderError message='Enter Password' />}
         {(credentials.password && credentials.password.length < 5) && <RenderError message='Password should be minimum 5 characters' />}
 
-        <TouchableOpacity
-          style={{ backgroundColor: disabled ? 'grey' : '#00a3e5', paddingVertical: 20, justifyContent: 'center', alignItems: 'center', borderRadius: 37, marginBottom: 30, marginTop: 16 }}
-          disabled={disabled}
-          onPress={() => getData()}
-        >
-          <Text style={{ fontSize: 20, fontWeight: 500, color: 'white' }}>
-            Login
-          </Text>
-        </TouchableOpacity>
+        <View style={{justifyContent:'center', alignItems:'center'}}>
+          <TouchableOpacity
+            style={{ backgroundColor: disabled ? 'grey' : 'blue', paddingVertical: 20, justifyContent: 'center', alignItems: 'center', borderRadius: 37, marginBottom: 30, marginTop: 16, width: 300 }}
+            disabled={disabled}
+            onPress={() => getData()}
+          >
+            <Text style={{ fontSize: 20, fontWeight: 500, color: 'white' }}>
+              Login
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   )

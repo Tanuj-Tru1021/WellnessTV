@@ -8,3 +8,5 @@ export const RenderError = ({ message }) => {
 }
 
 export const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/
+
+export const BASE_URL = 'https://api.thewellnesscorner.com/'

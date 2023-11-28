@@ -5,7 +5,7 @@ import Ionicon from 'react-native-vector-icons/Ionicons'
 const Header = ({ Title, isHome, onPressBack, onPressHome, onPressLogout }) => {
 
     return (
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 8, alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 8, alignItems: 'center', elevation: 70, shadowColor:'black' }}>
             {isHome ?
                 <Ionicon name="home" size={30} color='black' /> :
                 <TouchableOpacity onPress={onPressBack}>

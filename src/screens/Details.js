@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList } from 'react-native'
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Header from '../components/Header'
 
@@ -22,7 +22,7 @@ const Details = ({ route, navigation }) => {
       <FlatList
         data={collections.videos}
         keyExtractor={item => item.fields.image.sys.id}
-        style={{marginBottom: 32}}
+        style={{ marginBottom: 32 }}
         ListHeaderComponent={(
           <View>
             <Image
@@ -38,7 +38,18 @@ const Details = ({ route, navigation }) => {
         )}
         renderItem={({ item }) => {
           return (
-            <View style={{ margin: 8, borderWidth: 2, borderColor: 'black' }}>
+            <TouchableOpacity
+              style={{ margin: 8, borderWidth: 2, borderColor: 'black' }}
+              onPress={() => navigation.navigate('VideoDetails', {
+                name: item.fields.title,
+                imageURL: item.fields.image.fields.file.url,
+                description: item.fields.description,
+                videoURL: item.fields.url
+              })}
+            >
+              {
+                console.log(item.fields.url)
+              }
               <Image
                 src={'https:' + item.fields.image.fields.file.url}
                 style={{ height: 300, width: '100%' }}
@@ -49,7 +60,7 @@ const Details = ({ route, navigation }) => {
               <Text style={{ fontSize: 14, fontWeight: 400, color: 'black', marginHorizontal: 4, marginBottom: 8 }}>
                 {item.fields.description}
               </Text>
-            </View>
+            </TouchableOpacity>
           )
         }}
       />
