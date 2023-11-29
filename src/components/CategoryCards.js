@@ -3,7 +3,7 @@ import React from 'react'
 
 const CategoryCards = ({ src, onPressImage }) => {
 
-    let imageURL = 'https:'+src
+    let imageURL = 'https:' + src
     return (
         <TouchableOpacity
             style={{ backgroundColor: 'white' }}
@@ -11,7 +11,7 @@ const CategoryCards = ({ src, onPressImage }) => {
         >
             <Image
                 src={imageURL}
-                style={{height: 170, width: 200, borderRadius: 15}}
+                style={{ height: 170, width: 200, borderRadius: 15 }}
             />
         </TouchableOpacity>
     )

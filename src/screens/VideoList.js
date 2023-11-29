@@ -42,11 +42,12 @@ const VideoList = ({ route, navigation }) => {
             <FlatList
                 data={category}
                 keyExtractor={item => item.sys.id}
+                showsVerticalScrollIndicator={false}
                 style={{ marginBottom: 50 }}
                 renderItem={({ item }) => {
                     return (
                         <TouchableOpacity
-                            style={{ margin: 8, borderWidth: 2, borderRadius: 4 }}
+                            style={{ margin: 8, borderWidth: 1, borderRadius: 4, borderColor:'grey' }}
                             onPress={() => navigation.navigate('VideoDetails', {
                                 name: item.fields.title,
                                 imageURL: item.fields.image.fields.file.url,
