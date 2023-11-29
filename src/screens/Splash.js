@@ -8,8 +8,8 @@ const Splash = ({ navigation }) => {
         const mToken = await AsyncStorage.getItem('toke')
         const mLegacyToken = await AsyncStorage.getItem('legacyToken')
         !mToken && !mLegacyToken ?
-            navigation.navigate('Login')
-            : navigation.navigate('Home')
+            navigation.replace('Login')
+            : navigation.replace('Home')
     }
     useEffect(() => {
         setTimeout(async () => {

@@ -45,9 +45,6 @@ const Login = ({ navigation }) => {
     const mToken = await AsyncStorage.getItem("token")
     const mLegacyToken = await AsyncStorage.getItem("legacyToken")
 
-    console.log("token", mToken)
-    console.log("legacyToken", mLegacyToken)
-
     if (mToken && mLegacyToken && reg.test(credentials.email) && credentials.password.length > 5) {
       setCredentials({
         email: '',

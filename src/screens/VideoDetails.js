@@ -13,7 +13,6 @@ const VideoDetails = ({ route, navigation }) => {
     }
     const { name, imageURL, description, videoURL } = route.params
     const imageUrl = "https:" + imageURL
-    console.log(videoURL)
     return (
         <View style={{ paddingTop: 16, flex: 1, backgroundColor: 'white' }}>
             <Header

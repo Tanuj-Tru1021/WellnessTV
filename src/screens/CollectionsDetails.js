@@ -43,9 +43,6 @@ const CollectionsDetails = ({ route, navigation }) => {
                 videoURL: item.fields.url
               })}
             >
-              {
-                console.log(item.fields.url)
-              }
               <Image
                 src={'https:' + item.fields.image.fields.file.url}
                 style={{ height: 300, width: '100%' }}

@@ -2,7 +2,7 @@ import { Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 
 const CollectionsCard = ({ src, onPressImage }) => {
-    // console.log(src)
+    
     let imageURL = 'https:'+src
     return (
         <TouchableOpacity

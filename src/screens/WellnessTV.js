@@ -34,8 +34,6 @@ const WellnessTV = ({ navigation }) => {
     }
     await makeRequest(CategoryURL_endPoint, method, body, headers, setterCategories)
     await makeRequest(CollectionsURL_endPoint, method, body, headers, setterItem)
-    // console.log(item[0].fields.image.fields.file.url)
-    // console.log(category.items[0].fields.image.fields.file.url)
   }
 
   const logout = async () => {

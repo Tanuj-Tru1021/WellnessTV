@@ -21,7 +21,7 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
         return `${mins}:${secs}`
     }
     return (
-        <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 16, marginTop: 10, width: width, height: height, borderRadius: 8, borderWidth: 2, borderColor:'grey', paddingTop: 8 }}>
+        <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 16, marginTop: 10, width: width, height: height, borderRadius: 8, borderWidth: 2, borderColor: 'grey', paddingTop: 8 }}>
             <View style={{ flexDirection: 'row' }}>
                 <Image
                     src={imageUrl}
@@ -50,7 +50,7 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
                     ref={videoRef}
                     paused={playVideo}
                     source={{ uri: url }}
-                    onProgress={(x) => {setProgress(x)}}
+                    onProgress={(x) => { setProgress(x) }}
                     onLoad={() => {
                         videoPlay()
                     }}
@@ -62,9 +62,6 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
                         style={{ width: '100%', height: 275, position: 'absolute', backgroundColor: 'rgba(0,0,0,0)', justifyContent: 'center', alignItems: 'center' }}
                         onPress={() => setClicked(false)}
                     >
-                        {
-                            console.log(progress.currentTime)
-                        }
                         <TouchableOpacity
                             style={{ marginHorizontal: 40 }}
                             onPress={() => {
@@ -103,7 +100,7 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
                         {views}
                     </Text>
                 </View>
-                <Text style={{fontSize: 14, fontWeight: 400, color:'grey'}}>
+                <Text style={{ fontSize: 14, fontWeight: 400, color: 'grey' }}>
                     {subscribers}
                 </Text>
             </View>
