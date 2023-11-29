@@ -35,15 +35,16 @@ const Login = ({ navigation }) => {
       "email": credentials.email,
       "password": credentials.password
     }
+    const headers= {}
 
-    await makeRequest(URL_endPoint, method, body, setter)
+    await makeRequest(URL_endPoint, method, body, headers, setter)
     setToken(data && data.token)
     setLegacyToken(data && data.legacyToken)
     await AsyncStorage.setItem("token", token)
     await AsyncStorage.setItem("legacyToken", legacyToken)
 
-    const mToken = await AsyncStorage.getItem("token")
-    const mLegacyToken = await AsyncStorage.getItem("legacyToken")
+    const mToken = AsyncStorage.getItem("token")
+    const mLegacyToken = AsyncStorage.getItem("legacyToken")
 
     if (mToken && mLegacyToken && reg.test(credentials.email) && credentials.password.length > 5) {
       setCredentials({

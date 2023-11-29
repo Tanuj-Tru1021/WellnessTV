@@ -16,6 +16,7 @@ const useRequest = () => {
             }
             const response = await axios(request)
             setter(response.data)
+            return response.data
         } catch (err) {
             console.log("Error: ",err.message)
             if (err.response) {
