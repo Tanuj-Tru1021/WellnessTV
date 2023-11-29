@@ -10,6 +10,7 @@ import VideoList from './screens/VideoList'
 import VideoDetails from './screens/VideoDetails'
 import VideoPlayer from './screens/VideoPlayer'
 import Home from './screens/Home'
+import ActivityFeed from './screens/ActivityFeed'
 
 const Stack = createStackNavigator()
 
@@ -28,6 +29,7 @@ const Navigator = () => {
         <Stack.Screen name='VideoList' component={VideoList} />
         <Stack.Screen name='VideoDetails' component={VideoDetails} />
         <Stack.Screen name='VideoPlayer' component={VideoPlayer} />
+        <Stack.Screen name="ActivityFeed" component={ActivityFeed} />
       </Stack.Navigator>
     </NavigationContainer>
   )

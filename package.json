@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@n1ru4l/react-in-center-of-screen": "^1.0.0-alpha.4",
     "@react-native-async-storage/async-storage": "^1.19.5",
     "@react-native-community/slider": "^4.4.3",
     "@react-navigation/native": "^6.1.9",
