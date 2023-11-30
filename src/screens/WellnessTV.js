@@ -46,78 +46,79 @@ const WellnessTV = ({ navigation }) => {
     fetchAPI()
   }, [])
   return (
-    <View style={{ flex: 1, paddingTop: 16, paddingHorizontal: 8, backgroundColor: 'white' }}>
+    <View style={{ flex: 1 }}>
       <Header
         isHome={false}
         Title={'Wellness TV'}
         onPressLogout={logout}
-        onPressHome={() => navigation.navigate('Home')}
         onPressBack={() => navigation.goBack()}
       />
-      <FlatList
-        data={category.items}
-        showsVerticalScrollIndicator={false}
-        key={'_'}
-        keyExtractor={item => '_' + item.sys.id}
-        numColumns={2}
-        ListHeaderComponent={(
-          <View style={{ marginHorizontal: 8 }}>
-            <Text style={{ fontSize: 16, fontWeight: 500, color: 'black', marginTop: 8, marginBottom: 4 }}>
-              Browse By Category
-            </Text>
-            <Text style={{ fontSize: 12, fontWeight: 400, color: 'black' }}>
-              Explore all the wellness sessions on The Wellness Corner
-            </Text>
-          </View>
-        )}
-        renderItem={({ item }) => {
-          return (
-            <View style={{ margin: 8 }}>
-              <CategoryCards
-                onPressImage={() => navigation.navigate('VideoList', { name: item.fields.name })}
-                src={item.fields.image.fields.file.url}
-              />
+      <View style={{ flex: 1, paddingTop: 16, paddingHorizontal: 8, backgroundColor: 'white' }}>
+        <FlatList
+          data={category.items}
+          showsVerticalScrollIndicator={false}
+          key={'_'}
+          keyExtractor={item => '_' + item.sys.id}
+          numColumns={2}
+          ListHeaderComponent={(
+            <View style={{ marginHorizontal: 8 }}>
+              <Text style={{ fontSize: 16, fontWeight: 500, color: 'black', marginTop: 8, marginBottom: 4 }}>
+                Browse By Category
+              </Text>
+              <Text style={{ fontSize: 12, fontWeight: 400, color: 'black' }}>
+                Explore all the wellness sessions on The Wellness Corner
+              </Text>
             </View>
-          )
-        }}
-        ListEmptyComponent={(
-          <View style={{ marginTop: 16, padding: 8 }}>
-            <ActivityIndicator size={'large'} color={'black'} />
-          </View>
-        )}
-        ListFooterComponent={(
-          <FlatList
-            data={item}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={item => item.sys.id}
-            ListHeaderComponent={(
+          )}
+          renderItem={({ item }) => {
+            return (
               <View style={{ margin: 8 }}>
-                <Text style={{ fontSize: 16, fontWeight: 500, color: 'black', marginTop: 8, marginBottom: 4 }}>
-                  Explore Collections
-                </Text>
-                <Text style={{ fontSize: 12, fontWeight: 400, color: 'black' }}>
-                  Explore all collections of workouts & meditations curated by our community of health experts
-                </Text>
+                <CategoryCards
+                  onPressImage={() => navigation.navigate('VideoList', { name: item.fields.name })}
+                  src={item.fields.image.fields.file.url}
+                />
               </View>
-            )}
-            renderItem={({ item }) => {
-              return (
-                <View style={{ marginVertical: 8 }}>
-                  <CollectionsCard
-                    onPressImage={() => navigation.navigate('CollectionsDetails', { collections: item.fields })}
-                    src={item.fields.image.fields.file.url}
-                  />
+            )
+          }}
+          ListEmptyComponent={(
+            <View style={{ marginTop: 16, padding: 8 }}>
+              <ActivityIndicator size={'large'} color={'black'} />
+            </View>
+          )}
+          ListFooterComponent={(
+            <FlatList
+              data={item}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={item => item.sys.id}
+              ListHeaderComponent={(
+                <View style={{ margin: 8 }}>
+                  <Text style={{ fontSize: 16, fontWeight: 500, color: 'black', marginTop: 8, marginBottom: 4 }}>
+                    Explore Collections
+                  </Text>
+                  <Text style={{ fontSize: 12, fontWeight: 400, color: 'black' }}>
+                    Explore all collections of workouts & meditations curated by our community of health experts
+                  </Text>
                 </View>
-              )
-            }}
-            ListEmptyComponent={(
-              <View style={{ padding: 8, marginTop: 16 }}>
-                <ActivityIndicator size={'large'} color={'black'} />
-              </View>
-            )}
-          />
-        )}
-      />
+              )}
+              renderItem={({ item }) => {
+                return (
+                  <View style={{ marginVertical: 8 }}>
+                    <CollectionsCard
+                      onPressImage={() => navigation.navigate('CollectionsDetails', { collections: item.fields })}
+                      src={item.fields.image.fields.file.url}
+                    />
+                  </View>
+                )
+              }}
+              ListEmptyComponent={(
+                <View style={{ padding: 8, marginTop: 16 }}>
+                  <ActivityIndicator size={'large'} color={'black'} />
+                </View>
+              )}
+            />
+          )}
+        />
+      </View>
     </View>
   )
 }

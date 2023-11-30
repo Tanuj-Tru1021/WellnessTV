@@ -35,29 +35,44 @@ const Login = ({ navigation }) => {
       "email": credentials.email,
       "password": credentials.password
     }
-    const headers= {}
+    const headers = {}
 
     await makeRequest(URL_endPoint, method, body, headers, setter)
     setToken(data && data.token)
     setLegacyToken(data && data.legacyToken)
     await AsyncStorage.setItem("token", token)
     await AsyncStorage.setItem("legacyToken", legacyToken)
+  }
 
-    const mToken = AsyncStorage.getItem("token")
-    const mLegacyToken = AsyncStorage.getItem("legacyToken")
+  const verify = async () => {
 
-    if (mToken && mLegacyToken && reg.test(credentials.email) && credentials.password.length > 5) {
-      setCredentials({
-        email: '',
-        password: ''
-      })
-      navigation.navigate('Home')
-    } else if (credentials.password.length < 5) {
-      alert("Minimum password length should be 5")
-    } else if (credentials.email.length === 0) {
-      alert("Email address cannot be empty")
-    } else {
-      alert("Invalid email address")
+    try {
+      const mToken = await AsyncStorage.getItem("token")
+      const mLegacyToken = await AsyncStorage.getItem("legacyToken")
+      console.log(mToken, "tokennnnn1111111")
+      console.log(mLegacyToken, "legacyyyyyyy22222222222")
+
+      if (mToken && mLegacyToken) {
+        const validEmail = reg.test(credentials.email)
+        const validPass = credentials.password.length > 5
+        if(validEmail && validPass) {
+          setCredentials({
+            email: '',
+            password: ''
+          })
+          navigation.navigate('Home')
+        } else if (!validPass) {
+          alert("Minimum password length should be 5")
+        } else if (credentials.email.length === 0) {
+          alert("Email address cannot be empty")
+        } else {
+          alert("Invalid email address")
+        }
+      } else {
+        alert('TRY AGAIN! Token not yet fetched.')
+      }
+    } catch (err) {
+      console.log(err.message)
     }
   }
 
@@ -79,6 +94,7 @@ const Login = ({ navigation }) => {
           Email
         </Text>
         <TextInput
+          autoCapitalize='none'
           placeholder='Enter your email address'
           placeholderTextColor={'grey'}
           keyboardType='email-address'
@@ -98,6 +114,7 @@ const Login = ({ navigation }) => {
         </Text>
         <View style={{ flexDirection: 'row' }}>
           <TextInput
+            autoCapitalize='none'
             placeholder='Enter your password'
             placeholderTextColor={'grey'}
             secureTextEntry={hidePassword}
@@ -119,11 +136,14 @@ const Login = ({ navigation }) => {
         {error.password && <RenderError message='Enter Password' />}
         {(credentials.password && credentials.password.length < 5) && <RenderError message='Password should be minimum 5 characters' />}
 
-        <View style={{justifyContent:'center', alignItems:'center'}}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <TouchableOpacity
             style={{ backgroundColor: disabled ? 'grey' : 'blue', paddingVertical: 20, justifyContent: 'center', alignItems: 'center', borderRadius: 37, marginBottom: 30, marginTop: 16, width: 300 }}
             disabled={disabled}
-            onPress={() => getData()}
+            onPress={async () => {
+              await getData()
+              await verify()
+            }}
           >
             <Text style={{ fontSize: 20, fontWeight: 500, color: 'white' }}>
               Login

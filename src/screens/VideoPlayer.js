@@ -14,29 +14,18 @@ const VideoPlayer = ({ route, navigation }) => {
     const [progress, setProgress] = useState(null)
     const [fullscreen, setFullscreen] = useState(false)
     const [isMuted, setIsMuted] = useState(false)
-    const [isPip, setIsPip] = useState(false)
     const videoRef = useRef(null)
-    const videoPlay = () => {
-        if (videoRef.current) {
-            videoRef.current.presentFullscreenPlayer()
-        }
-    }
     const format = seconds => {
         let mins = parseInt(seconds / 60).toString().padStart(2, '0')
         let secs = (Math.trunc(seconds) % 60).toString().padStart(2, '0')
         return `${mins}:${secs}`
     }
-    setTimeout(()=>{
-        if(clicked && !pause) {
-            setClicked(false)
-        }
-    }, 5000)
+
     return (
         <View style={{ flex: 1 }}>
             {fullscreen === false ? <Header
                 isHome={false}
                 onPressBack={() => navigation.goBack()}
-                onPressHome={() => navigation.navigate('Home')}
             /> : ""}
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black' }}>
                 <TouchableOpacity
@@ -48,11 +37,7 @@ const VideoPlayer = ({ route, navigation }) => {
                         ref={videoRef}
                         paused={pause}
                         muted={isMuted}
-                        pictureInPicture={isPip}
                         source={{ uri: videoURL }}
-                        onLoad={() => {
-                            videoPlay()
-                        }}
                         onProgress={(x) => setProgress(x)}
                         style={{ width: '100%', height: fullscreen ? '100%' : 300 }}
                     />
@@ -103,27 +88,16 @@ const VideoPlayer = ({ route, navigation }) => {
                                 width: '100%', position: 'absolute', top: fullscreen ? 10 : 30, paddingHorizontal: 20
                             }}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <TouchableOpacity onPress={() => {
-                                            if (fullscreen) {
-                                                Orientation.lockToPortrait()
-                                            } else {
-                                                Orientation.lockToLandscape()
-                                            }
-                                            setFullscreen(!fullscreen)
-                                        }}>
-                                            <Ionicon name={fullscreen ? "contract" : "expand"} size={40} color='white' />
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={{ marginHorizontal: 10 }}
-                                            onPress={() => {
-                                                setIsPip(!isPip)
-                                            }}
-                                        >
-                                            <Ionicon name="copy-outline" size={40} color="white" />
-                                        </TouchableOpacity>
-                                    </View>
-
+                                    <TouchableOpacity onPress={() => {
+                                        if (fullscreen) {
+                                            Orientation.lockToPortrait()
+                                        } else {
+                                            Orientation.lockToLandscape()
+                                        }
+                                        setFullscreen(!fullscreen)
+                                    }}>
+                                        <Ionicon name={fullscreen ? "contract" : "expand"} size={40} color='white' />
+                                    </TouchableOpacity>
                                     <TouchableOpacity onPress={() => {
                                         setIsMuted(!isMuted)
                                     }}>

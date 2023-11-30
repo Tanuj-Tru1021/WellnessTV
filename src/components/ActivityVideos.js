@@ -10,18 +10,13 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
     const [clicked, setClicked] = useState(false)
     const [pause, setPause] = useState(false)
     const [progress, setProgress] = useState(null)
-    const videoPlay = () => {
-        if (videoRef.current) {
-            videoRef.current.presentFullscreenPlayer()
-        }
-    }
     const format = seconds => {
         let mins = parseInt(seconds / 60).toString().padStart(2, '0')
         let secs = (Math.trunc(seconds) % 60).toString().padStart(2, '0')
         return `${mins}:${secs}`
     }
     return (
-        <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 16, marginTop: 10, width: width, height: height, borderRadius: 8, borderWidth: 2, borderColor: 'grey', paddingTop: 8 }}>
+        <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 16, marginTop: 10, width: width, height: height, borderRadius: 8, borderWidth: 2, borderColor: 'grey', paddingTop: 16 }}>
             <View style={{ flexDirection: 'row' }}>
                 <Image
                     src={imageUrl}
@@ -51,9 +46,6 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
                     paused={playVideo}
                     source={{ uri: url }}
                     onProgress={(x) => { setProgress(x) }}
-                    onLoad={() => {
-                        videoPlay()
-                    }}
                     style={{ width: '100%', height: 275 }}
                 />
                 {

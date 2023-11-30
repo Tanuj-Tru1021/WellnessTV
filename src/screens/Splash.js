@@ -5,8 +5,10 @@ import Logo from '../../assets/splash-logo.png'
 
 const Splash = ({ navigation }) => {
     const handle = async () => {
-        const mToken = await AsyncStorage.getItem('toke')
+        const mToken = await AsyncStorage.getItem('token')
         const mLegacyToken = await AsyncStorage.getItem('legacyToken')
+        console.log(mToken, "tokennnnnnnn")
+        console.log(mLegacyToken, "legacyyyyyyyyy")
         !mToken && !mLegacyToken ?
             navigation.replace('Login')
             : navigation.replace('Home')
