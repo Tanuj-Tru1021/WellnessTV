@@ -56,6 +56,7 @@ const WellnessTV = ({ navigation }) => {
       />
       <FlatList
         data={category.items}
+        showsVerticalScrollIndicator={false}
         key={'_'}
         keyExtractor={item => '_' + item.sys.id}
         numColumns={2}
@@ -87,6 +88,7 @@ const WellnessTV = ({ navigation }) => {
         ListFooterComponent={(
           <FlatList
             data={item}
+            showsVerticalScrollIndicator={false}
             keyExtractor={item => item.sys.id}
             ListHeaderComponent={(
               <View style={{ margin: 8 }}>
