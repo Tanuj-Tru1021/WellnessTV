@@ -11,7 +11,7 @@ const CategoryCards = ({ src, onPressImage }) => {
         >
             <Image
                 src={imageURL}
-                style={{ height: 170, width: 184, borderRadius: 15 }}
+                style={{ height: 190, borderRadius: 15 }}
             />
         </TouchableOpacity>
     )

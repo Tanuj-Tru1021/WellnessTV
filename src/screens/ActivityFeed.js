@@ -10,7 +10,7 @@ import {
 } from "@n1ru4l/react-in-center-of-screen";
 
 const { height: windowHeight } = Dimensions.get("window");
-const boxHeight = 2.8 * windowHeight / 5;
+const boxHeight = 3.2 * windowHeight / 5;
 
 const ActivityFeed = ({ navigation }) => {
 

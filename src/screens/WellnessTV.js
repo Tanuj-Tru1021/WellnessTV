@@ -29,7 +29,7 @@ const WellnessTV = ({ navigation }) => {
         setItem(data)
       },
       onError: (err) => {
-        console.log("data -", err)
+        console.log("Error -", err)
       }
     })
     await makeRequest({
@@ -44,7 +44,7 @@ const WellnessTV = ({ navigation }) => {
         setCategory(data)
       },
       onError: (err) => {
-        console.log("data -", err)
+        console.log("Error -", err)
       }
     })
   }
@@ -66,11 +66,12 @@ const WellnessTV = ({ navigation }) => {
         onPressLogout={logout}
         onPressBack={() => navigation.goBack()}
       />
-      <View style={{ flex: 1, paddingTop: 16, paddingHorizontal: 4, backgroundColor: 'white' }}>
+      <View style={{ flex: 1, paddingHorizontal: 4, backgroundColor: 'white' }}>
         <FlatList
           data={category.items}
           showsVerticalScrollIndicator={false}
           key={'_'}
+          style={{ paddingTop: 16 }}
           keyExtractor={item => '_' + item.sys.id}
           numColumns={2}
           ListHeaderComponent={(
@@ -85,10 +86,12 @@ const WellnessTV = ({ navigation }) => {
           )}
           renderItem={({ item }) => {
             return (
-              <CategoryCards
-                onPressImage={() => navigation.navigate('VideoList', { name: item.fields.name })}
-                src={item.fields.image.fields.file.url}
-              />
+              <View style={{ width: '50%'}}>
+                <CategoryCards
+                  onPressImage={() => navigation.navigate('VideoList', { name: item.fields.name })}
+                  src={item.fields.image.fields.file.url}
+                />
+              </View>
             )
           }}
           ListEmptyComponent={(
@@ -101,6 +104,7 @@ const WellnessTV = ({ navigation }) => {
               data={item}
               showsVerticalScrollIndicator={false}
               keyExtractor={item => item.sys.id}
+              style={{ marginBottom: 20 }}
               ListHeaderComponent={(
                 <View style={{ margin: 8 }}>
                   <Text style={{ fontSize: 20, fontWeight: 500, color: 'black', marginTop: 8, marginBottom: 4 }}>
