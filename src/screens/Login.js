@@ -49,7 +49,7 @@ const Login = ({ navigation }) => {
       onSuccess: (data) => {
         AsyncStorage.setItem("token", data.token)
         AsyncStorage.setItem("legacyToken", data.legacyToken)
-        AsyncStorage.setItem("member", data.member)
+        AsyncStorage.setItem("member", JSON.stringify(data.member))
         setLoading(false)
         setCredentials({
           email: '',

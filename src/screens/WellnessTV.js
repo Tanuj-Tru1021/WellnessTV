@@ -76,17 +76,23 @@ const WellnessTV = ({ navigation }) => {
           numColumns={2}
           ListHeaderComponent={(
             <View style={{ marginHorizontal: 8 }}>
-              <Text style={{ fontSize: 20, fontWeight: 500, color: 'black', marginTop: 8 }}>
+              <Text style={{
+                fontSize: 20, fontWeight: 500,
+                color: 'black', marginTop: 8
+              }}>
                 Browse By Category
               </Text>
-              <Text style={{ fontSize: 16, fontWeight: 400, color: 'black', marginTop: 4 }}>
+              <Text style={{
+                fontSize: 16, fontWeight: 400,
+                color: 'black', marginTop: 4
+              }}>
                 Explore all the wellness sessions on The Wellness Corner
               </Text>
             </View>
           )}
           renderItem={({ item }) => {
             return (
-              <View style={{ width: '50%'}}>
+              <View style={{ width: '50%' }}>
                 <CategoryCards
                   onPressImage={() => navigation.navigate('VideoList', { name: item.fields.name })}
                   src={item.fields.image.fields.file.url}
@@ -107,7 +113,10 @@ const WellnessTV = ({ navigation }) => {
               style={{ marginBottom: 20 }}
               ListHeaderComponent={(
                 <View style={{ margin: 8 }}>
-                  <Text style={{ fontSize: 20, fontWeight: 500, color: 'black', marginTop: 8, marginBottom: 4 }}>
+                  <Text style={{
+                    fontSize: 20, fontWeight: 500,
+                    color: 'black', marginTop: 8, marginBottom: 4
+                  }}>
                     Explore Collections
                   </Text>
                   <Text style={{ fontSize: 16, fontWeight: 400, color: 'black' }}>
