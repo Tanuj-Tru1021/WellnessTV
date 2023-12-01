@@ -47,10 +47,16 @@ const CollectionsDetails = ({ route, navigation }) => {
                   src={'https:' + item.fields.image.fields.file.url}
                   style={{ height: 300, width: '100%' }}
                 />
-                <Text style={{ fontSize: 20, fontWeight: 500, color: 'black', margin: 4 }}>
+                <Text style={{
+                  fontSize: 20, fontWeight: 500,
+                  color: 'black', margin: 4
+                }}>
                   {item.fields.title}
                 </Text>
-                <Text style={{ fontSize: 14, fontWeight: 400, color: 'black', marginHorizontal: 4, marginBottom: 8 }}>
+                <Text style={{
+                  fontSize: 14, fontWeight: 400,
+                  color: 'black', marginHorizontal: 4, marginBottom: 8
+                }}>
                   {item.fields.description}
                 </Text>
               </TouchableOpacity>

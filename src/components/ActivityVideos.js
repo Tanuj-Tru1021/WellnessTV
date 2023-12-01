@@ -57,7 +57,11 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
                 {
                     clicked &&
                     <TouchableOpacity
-                        style={{ width: '100%', height: 275, position: 'absolute', backgroundColor: 'rgba(0,0,0,0)', justifyContent: 'center', alignItems: 'center' }}
+                        style={{
+                            width: '100%', height: 275,
+                            position: 'absolute', backgroundColor: 'rgba(0,0,0,0)',
+                            justifyContent: 'center', alignItems: 'center'
+                        }}
                         onPress={() => setClicked(false)}
                     >
                         <TouchableOpacity
@@ -68,7 +72,11 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
                         >
                             <Ionicon name={pause ? "play-circle-outline" : "pause-circle-outline"} size={50} color={'white'} />
                         </TouchableOpacity>
-                        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 40, paddingHorizontal: 15, alignItems: 'center' }}>
+                        <View style={{
+                            width: '100%', flexDirection: 'row',
+                            justifyContent: 'space-between', position: 'absolute',
+                            bottom: 40, paddingHorizontal: 15, alignItems: 'center'
+                        }}>
                             <Text style={{ color: 'white' }}>
                                 {format(progress.currentTime)}
                             </Text>
@@ -94,7 +102,10 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
                     <Text style={{ fontSize: 14, fontWeight: 400, color: 'black' }}>
                         Views:
                     </Text>
-                    <Text style={{ fontSize: 14, fontWeight: 400, color: 'grey', marginLeft: 2 }}>
+                    <Text style={{
+                        fontSize: 14, fontWeight: 400,
+                        color: 'grey', marginLeft: 2
+                    }}>
                         {views}
                     </Text>
                 </View>

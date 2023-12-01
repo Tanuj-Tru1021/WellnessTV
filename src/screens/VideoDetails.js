@@ -20,16 +20,27 @@ const VideoDetails = ({ route, navigation }) => {
                         style={{ height: 350, width: '100%' }}
                     />
                     <View style={{ margin: 16 }}>
-                        <Text style={{ fontSize: 20, fontWeight: 500, color: 'black', marginBottom: 8 }}>
+                        <Text style={{
+                            fontSize: 20, fontWeight: 500,
+                            color: 'black', marginBottom: 8
+                        }}>
                             {name}
                         </Text>
-                        <Text style={{ fontSize: 14, fontWeight: 400, color: 'black', marginBottom: 8 }}>
+                        <Text style={{
+                            fontSize: 14, fontWeight: 400,
+                            color: 'black', marginBottom: 8
+                        }}>
                             {description}
                         </Text>
                     </View>
                 </View>
                 <TouchableOpacity
-                    style={{ paddingHorizontal: 30, paddingVertical: 15, backgroundColor: '#34bbba', bottom: 0, position: 'absolute', width: '100%', justifyContent: 'center', alignItems: 'center' }}
+                    style={{
+                        paddingHorizontal: 30, paddingVertical: 15,
+                        backgroundColor: '#34bbba', bottom: 0,
+                        position: 'absolute', width: '100%',
+                        justifyContent: 'center', alignItems: 'center'
+                    }}
                     onPress={() => navigation.navigate('VideoPlayer', { videoURL: videoURL })}
                 >
                     <Text style={{ fontSize: 20, fontWeight: 500, color: 'white' }}>

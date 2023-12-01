@@ -19,18 +19,28 @@ const Home = ({ navigation }) => {
                 isHome={true}
                 onPressLogout={logout}
             />
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', paddingHorizontal: 20, paddingTop: 10 }}>
+            <View style={{
+                flex: 1, justifyContent: 'center',
+                alignItems: 'center', backgroundColor: 'white',
+                paddingHorizontal: 20, paddingTop: 10
+            }}>
                 <TouchableOpacity
                     style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
                     onPress={() => navigation.navigate('WellnessTV')}
                 >
                     <Ionicon name='tv' size={50} color="black" />
-                    <Text style={{ fontSize: 24, fontWeight: 500, color: 'black', marginHorizontal: 8 }}>
+                    <Text style={{
+                        fontSize: 24, fontWeight: 500,
+                        color: 'black', marginHorizontal: 8
+                    }}>
                         Wellness TV
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}
+                    style={{
+                        flexDirection: 'row', justifyContent: 'center',
+                        alignItems: 'center', marginTop: 20
+                    }}
                     onPress={() => navigation.navigate('ActivityFeed')}
                 >
                     <Ionicon name='newspaper' size={50} color="black" />

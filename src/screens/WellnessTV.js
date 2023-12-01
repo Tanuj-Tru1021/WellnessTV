@@ -14,22 +14,17 @@ const WellnessTV = ({ navigation }) => {
 
   const fetchAPI = async () => {
 
-    const CollectionsURL_endPoint = 'wellness-tv/collections'
-    const CategoryURL_endPoint = 'wellness-tv/categories'
-    const method = "GET"
-    const body = {}
     const token = await AsyncStorage.getItem('token')
     const legacyToken = await AsyncStorage.getItem('legacyToken')
-    const headers = {
-      'x-access-token': token,
-      'Authorization': `Bearer ${legacyToken}`,
-      ...headers
-    }
+
     await makeRequest({
-      endPoint: CollectionsURL_endPoint,
-      method: method,
-      body: body,
-      headers: headers,
+      endPoint: 'wellness-tv/collections',
+      method: 'GET',
+      body: {},
+      headers: {
+        'x-access-token': token,
+        'Authorization': `Bearer ${legacyToken}`
+      },
       onSuccess: (data) => {
         setItem(data)
       },
@@ -38,10 +33,13 @@ const WellnessTV = ({ navigation }) => {
       }
     })
     await makeRequest({
-      endPoint: CategoryURL_endPoint,
-      method: method,
-      body: body,
-      headers: headers,
+      endPoint: 'wellness-tv/categories',
+      method: 'GET',
+      body: {},
+      headers: {
+        'x-access-token': token,
+        'Authorization': `Bearer ${legacyToken}`
+      },
       onSuccess: (data) => {
         setCategory(data)
       },

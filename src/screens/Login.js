@@ -74,7 +74,10 @@ const Login = ({ navigation }) => {
         style={{ height: 250, width: '100%', }}
       />
       <View style={{ marginHorizontal: 30, paddingHorizontal: 16, }}>
-        <Text style={{ fontSize: 24, fontWeight: 500, color: 'white', marginBottom: 20, textAlign: 'center', }}>
+        <Text style={{
+          fontSize: 24, fontWeight: 500,
+          color: 'white', marginBottom: 20, textAlign: 'center'
+        }}>
           Login to your account
         </Text>
         <Text style={{ fontSize: 20, color: 'white', marginBottom: 8 }}>
@@ -111,12 +114,20 @@ const Login = ({ navigation }) => {
               setError(prev => ({ ...prev, password: (!text) }))
             }}
             value={credentials.password}
-            style={{ paddingVertical: 6, paddingLeft: 16, paddingRight: 50, backgroundColor: 'white', borderRadius: 8, width: '100%' }}
+            style={{
+              paddingVertical: 6, paddingLeft: 16,
+              paddingRight: 50, backgroundColor: 'white',
+              borderRadius: 8, width: '100%'
+            }}
           />
           <TouchableOpacity onPress={() => manageVisibility()}>
             <Image
               source={hidePassword ? require('../../assets/eye-closed.png') : require('../../assets/eye-open.png')}
-              style={{ width: 27, height: 24, position: 'absolute', tintColor: '#C4C4C4', justifyContent: 'center', top: 8, right: 12 }}
+              style={{
+                width: 27, height: 24,
+                position: 'absolute', tintColor: '#C4C4C4',
+                justifyContent: 'center', top: 8, right: 12
+              }}
             />
           </TouchableOpacity>
         </View>
@@ -125,7 +136,11 @@ const Login = ({ navigation }) => {
         {(credentials.password && credentials.password.length < 5) && <RenderError message='Password should be minimum 5 characters' />}
 
         <TouchableOpacity
-          style={{ backgroundColor: disabled ? 'grey' : 'blue', paddingVertical: 15, justifyContent: 'center', alignItems: 'center', borderRadius: 8, marginTop: 16 }}
+          style={{
+            backgroundColor: disabled ? 'grey' : 'blue',
+            paddingVertical: 15, justifyContent: 'center',
+            alignItems: 'center', borderRadius: 8, marginTop: 16
+          }}
           disabled={disabled}
           onPress={() => validate()}
         >

@@ -27,7 +27,10 @@ const VideoPlayer = ({ route, navigation }) => {
                 isHome={false}
                 onPressBack={() => navigation.goBack()}
             /> : ""}
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black' }}>
+            <View style={{
+                flex: 1, justifyContent: 'center',
+                alignItems: 'center', backgroundColor: 'black'
+            }}>
                 <TouchableOpacity
                     style={{ width: '100%', height: fullscreen ? "100%" : 300 }}
                     onPress={() => setClicked(true)}
@@ -43,7 +46,11 @@ const VideoPlayer = ({ route, navigation }) => {
                     />
                     {
                         clicked && <TouchableOpacity
-                            style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: 'rgba(0,0,0,0.3)', justifyContent: 'center', alignItems: 'center' }}
+                            style={{
+                                width: '100%', height: '100%',
+                                position: 'absolute', backgroundColor: 'rgba(0,0,0,0.3)',
+                                justifyContent: 'center', alignItems: 'center'
+                            }}
                             onPress={() => setClicked(false)}
                         >
                             <View style={{ flexDirection: 'row' }}>
@@ -66,7 +73,11 @@ const VideoPlayer = ({ route, navigation }) => {
                                     <Ionicon name="play-forward-outline" size={50} color={'white'} />
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', position: 'absolute', bottom: 0, paddingHorizontal: 15, alignItems: 'center' }}>
+                            <View style={{
+                                width: '100%', flexDirection: 'row',
+                                justifyContent: 'space-between', position: 'absolute',
+                                bottom: 0, paddingHorizontal: 15, alignItems: 'center'
+                            }}>
                                 <Text style={{ color: 'white' }}>
                                     {format(progress.currentTime)}
                                 </Text>
@@ -102,7 +113,9 @@ const VideoPlayer = ({ route, navigation }) => {
                                         setIsMuted(!isMuted)
                                     }}>
                                         {
-                                            isMuted ? <Ionicon name="volume-mute-outline" size={40} color="white" /> :
+                                            isMuted ?
+                                                <Ionicon name="volume-mute-outline" size={40} color="white" />
+                                                :
                                                 <Ionicon name="volume-medium-outline" size={40} color="white" />
                                         }
                                     </TouchableOpacity>

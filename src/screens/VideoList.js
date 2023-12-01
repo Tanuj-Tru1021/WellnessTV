@@ -55,7 +55,10 @@ const VideoList = ({ route, navigation }) => {
                     renderItem={({ item }) => {
                         return (
                             <TouchableOpacity
-                                style={{ margin: 8, borderWidth: 1, borderRadius: 4, borderColor: 'grey' }}
+                                style={{
+                                    margin: 8, borderWidth: 1,
+                                    borderRadius: 4, borderColor: 'grey'
+                                }}
                                 onPress={() => navigation.navigate('VideoDetails', {
                                     name: item.fields.title,
                                     imageURL: item.fields.image.fields.file.url,
@@ -67,10 +70,16 @@ const VideoList = ({ route, navigation }) => {
                                     src={"https:" + item.fields.image.fields.file.url}
                                     style={{ height: 300, width: '100%' }}
                                 />
-                                <Text style={{ margin: 8, fontSize: 20, fontWeight: 500, color: 'black' }}>
+                                <Text style={{
+                                    margin: 8, fontSize: 20,
+                                    fontWeight: 500, color: 'black'
+                                }}>
                                     {item.fields.title}
                                 </Text>
-                                <Text style={{ marginHorizontal: 8, marginBottom: 16, fontSize: 14, fontWeight: 400, color: 'black' }}>
+                                <Text style={{
+                                    marginHorizontal: 8, marginBottom: 16,
+                                    fontSize: 14, fontWeight: 400, color: 'black'
+                                }}>
                                     {item.fields.description}
                                 </Text>
                             </TouchableOpacity>
