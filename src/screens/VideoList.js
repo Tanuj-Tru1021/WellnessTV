@@ -9,9 +9,6 @@ const VideoList = ({ route, navigation }) => {
     const [category, setCategory] = useState([])
     const { name } = route.params
     const { makeRequest } = useRequest()
-    const setterCategory = (a) => {
-        setCategory(a)
-    }
 
     const fetchData = async () => {
         const URL_endPoint = `wellness-tv/categories/${name.replace(/\s+/g, '-').toLowerCase()}`
@@ -24,7 +21,18 @@ const VideoList = ({ route, navigation }) => {
             'Authorization': `Bearer ${legacyToken}`,
             ...headers
         }
-        await makeRequest(URL_endPoint, method, body, headers, setterCategory)
+        await makeRequest({
+            endPoint: URL_endPoint,
+            method: method,
+            body: body,
+            headers: headers,
+            onSuccess: (data) => {
+                setCategory(data)
+            },
+            onError: (err) => {
+                console.log("Error occurred: ", err)
+            }
+        })
     }
 
     useEffect(() => {

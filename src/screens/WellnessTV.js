@@ -12,13 +12,6 @@ const WellnessTV = ({ navigation }) => {
   const [item, setItem] = useState([])
   const { makeRequest } = useRequest()
 
-  const setterItem = (a) => {
-    setItem(a)
-  }
-
-  const setterCategories = (a) => {
-    setCategory(a)
-  }
   const fetchAPI = async () => {
 
     const CollectionsURL_endPoint = 'wellness-tv/collections'
@@ -32,8 +25,30 @@ const WellnessTV = ({ navigation }) => {
       'Authorization': `Bearer ${legacyToken}`,
       ...headers
     }
-    await makeRequest(CategoryURL_endPoint, method, body, headers, setterCategories)
-    await makeRequest(CollectionsURL_endPoint, method, body, headers, setterItem)
+    await makeRequest({
+      endPoint: CollectionsURL_endPoint,
+      method: method,
+      body: body,
+      headers: headers,
+      onSuccess: (data) => {
+        setItem(data)
+      },
+      onError: (err) => {
+        console.log("data -", err)
+      }
+    })
+    await makeRequest({
+      endPoint: CategoryURL_endPoint,
+      method: method,
+      body: body,
+      headers: headers,
+      onSuccess: (data) => {
+        setCategory(data)
+      },
+      onError: (err) => {
+        console.log("data -", err)
+      }
+    })
   }
 
   const logout = async () => {

@@ -16,7 +16,13 @@ const ActivityVideos = ({ Title, Date, url, imageUrl, description, views, subscr
         return `${mins}:${secs}`
     }
     return (
-        <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 16, marginTop: 10, width: width, height: height, borderRadius: 8, borderWidth: 2, borderColor: 'grey', paddingTop: 16 }}>
+        <View style={{
+            flex: 1, backgroundColor: 'white',
+            paddingHorizontal: 16, marginTop: 10,
+            width: width, height: height,
+            borderRadius: 8, borderWidth: 2,
+            borderColor: 'grey', paddingTop: 16
+        }}>
             <View style={{ flexDirection: 'row' }}>
                 <Image
                     src={imageUrl}

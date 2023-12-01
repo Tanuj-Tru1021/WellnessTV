@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useRef } from 'react'
+import React from 'react'
 import Header from '../components/Header'
 
 const VideoDetails = ({ route, navigation }) => {

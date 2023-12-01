@@ -3,7 +3,7 @@ import { Text } from 'react-native'
 
 export const RenderError = ({ message }) => {
     return (
-        <Text style={{ marginTop: 5, color: 'red', fontSize: 10, minHeight: 15 }}>{message}</Text>
+        <Text style={{ marginTop: 10, color: 'red', fontSize: 10, minHeight: 15 }}>{message}</Text>
     )
 }
 

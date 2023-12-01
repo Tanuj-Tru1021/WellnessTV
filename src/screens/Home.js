@@ -1,18 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import Header from '../components/Header'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Home = ({ navigation }) => {
-
-    const tryD = async () => {
-
-        const mToken = await AsyncStorage.getItem('token')
-        const mLegacyToken = await AsyncStorage.getItem('legacyToken')
-        console.log(mToken, 'tokennnnn')
-        console.log(mLegacyToken, 'legacyTokennnnn')
-    }
 
     const logout = async () => {
         await AsyncStorage.removeItem("token")
@@ -20,9 +12,6 @@ const Home = ({ navigation }) => {
         navigation.navigate('Login')
     }
 
-    useEffect(() => {
-        tryD() 
-    })
     return (
         <View style={{ flex: 1 }}>
             <Header

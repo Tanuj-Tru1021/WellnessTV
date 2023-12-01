@@ -1,82 +1,69 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import useRequest from '../hooks/useRequest'
 import VideoPlayer from '../../assets/video-player.png'
 import { reg, RenderError } from '../constants/Util'
 
 const Login = ({ navigation }) => {
-
-  const [credentials, setCredentials] = useState({
-    email: '',
-    password: '',
-  })
-
+  const [credentials, setCredentials] = useState({ email: '', password: '', })
   const [error, setError] = useState({})
-  const [data, setData] = useState([])
-  const [token, setToken] = useState("")
-  const [legacyToken, setLegacyToken] = useState("")
+  const [loading, setLoading] = useState(false)
   const [hidePassword, setHidePassword] = useState(true)
+
+  const { makeRequest } = useRequest()
 
   const manageVisibility = () => {
     setHidePassword(!hidePassword)
   }
 
-  const setter = (a) => {
-    setData(a)
+  const disabled = (credentials.email.length === 0 && credentials.password.length === 0)
+
+  const validate = () => {
+    if (!credentials.email) {
+      alert("Enter Email")
+    } else if (!reg.test(credentials.email)) {
+      alert("Enter Valid Email")
+    } else if (!credentials.password) {
+      alert("Enter Password")
+    } else if (credentials.password.length < 5) {
+      alert("Enter Valid Password")
+    } else {
+      sendData()
+    }
   }
-  const { makeRequest } = useRequest()
 
-  const getData = async () => {
-
+  const sendData = async () => {
+    setLoading(true)
     const URL_endPoint = 'auth/login'
     const method = 'POST'
     const body = {
       "email": credentials.email,
       "password": credentials.password
     }
-    const headers = {}
 
-    await makeRequest(URL_endPoint, method, body, headers, setter)
-    setToken(data && data.token)
-    setLegacyToken(data && data.legacyToken)
-    await AsyncStorage.setItem("token", token)
-    await AsyncStorage.setItem("legacyToken", legacyToken)
-  }
-
-  const verify = async () => {
-
-    try {
-      const mToken = await AsyncStorage.getItem("token")
-      const mLegacyToken = await AsyncStorage.getItem("legacyToken")
-      console.log(mToken, "tokennnnn1111111")
-      console.log(mLegacyToken, "legacyyyyyyy22222222222")
-
-      if (mToken && mLegacyToken) {
-        const validEmail = reg.test(credentials.email)
-        const validPass = credentials.password.length > 5
-        if(validEmail && validPass) {
-          setCredentials({
-            email: '',
-            password: ''
-          })
-          navigation.navigate('Home')
-        } else if (!validPass) {
-          alert("Minimum password length should be 5")
-        } else if (credentials.email.length === 0) {
-          alert("Email address cannot be empty")
-        } else {
-          alert("Invalid email address")
-        }
-      } else {
-        alert('TRY AGAIN! Token not yet fetched.')
+    await makeRequest({
+      endPoint: URL_endPoint,
+      method: method,
+      body: body,
+      onSuccess: (data) => {
+        AsyncStorage.setItem("token", data.token)
+        AsyncStorage.setItem("legacyToken", data.legacyToken)
+        AsyncStorage.setItem("member", data.member)
+        setLoading(false)
+        setCredentials({
+          email: '',
+          password: ''
+        })
+        navigation.navigate('Home')
+      },
+      onError: (err) => {
+        console.log("data -", err)
+        setLoading(false)
       }
-    } catch (err) {
-      console.log(err.message)
-    }
+    })
   }
 
-  const disabled = (credentials.email.length === 0 && credentials.password.length === 0)
   return (
     <ScrollView
       keyboardShouldPersistTaps='handled'
@@ -103,7 +90,7 @@ const Login = ({ navigation }) => {
             setError(prev => ({ ...prev, email: (!text) }))
           }}
           value={credentials.email}
-          style={{ paddingVertical: 6, paddingLeft: 16, marginBottom: 4, backgroundColor: 'white', borderRadius: 8 }}
+          style={{ paddingVertical: 6, paddingLeft: 16, backgroundColor: 'white', borderRadius: 8 }}
         />
 
         {error.email && <RenderError message='Enter Email' />}
@@ -112,6 +99,7 @@ const Login = ({ navigation }) => {
         <Text style={{ fontSize: 20, color: 'white', marginBottom: 8 }}>
           Password
         </Text>
+
         <View style={{ flexDirection: 'row' }}>
           <TextInput
             autoCapitalize='none'
@@ -123,7 +111,7 @@ const Login = ({ navigation }) => {
               setError(prev => ({ ...prev, password: (!text) }))
             }}
             value={credentials.password}
-            style={{ paddingVertical: 6, paddingHorizontal: 16, marginBottom: 4, backgroundColor: 'white', borderRadius: 8, width: '100%', position: 'relative' }}
+            style={{ paddingVertical: 6, paddingLeft: 16, paddingRight: 50, backgroundColor: 'white', borderRadius: 8, width: '100%' }}
           />
           <TouchableOpacity onPress={() => manageVisibility()}>
             <Image
@@ -136,20 +124,16 @@ const Login = ({ navigation }) => {
         {error.password && <RenderError message='Enter Password' />}
         {(credentials.password && credentials.password.length < 5) && <RenderError message='Password should be minimum 5 characters' />}
 
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <TouchableOpacity
-            style={{ backgroundColor: disabled ? 'grey' : 'blue', paddingVertical: 20, justifyContent: 'center', alignItems: 'center', borderRadius: 37, marginBottom: 30, marginTop: 16, width: 300 }}
-            disabled={disabled}
-            onPress={async () => {
-              await getData()
-              await verify()
-            }}
-          >
-            <Text style={{ fontSize: 20, fontWeight: 500, color: 'white' }}>
-              Login
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={{ backgroundColor: disabled ? 'grey' : 'blue', paddingVertical: 15, justifyContent: 'center', alignItems: 'center', borderRadius: 8, marginTop: 16 }}
+          disabled={disabled}
+          onPress={() => validate()}
+        >
+          {loading ? <ActivityIndicator color={'white'} /> : <Text style={{ fontSize: 20, fontWeight: 500, color: 'white' }}>
+            Login
+          </Text>}
+        </TouchableOpacity>
+
       </View>
     </ScrollView>
   )
