@@ -1,5 +1,6 @@
 import React, { } from 'react'
 import { Text } from 'react-native'
+import { ENVIRONMENT } from './Environment'
 
 export const RenderError = ({ message }) => {
     return (
@@ -9,4 +10,4 @@ export const RenderError = ({ message }) => {
 
 export const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/
 
-export const BASE_URL = 'https://api.thewellnesscorner.com/'
+export const BASE_URL = ENVIRONMENT === 'PRODUCTION' ? 'https://api.thewellnesscorner.com/' : 'https://devapi.thewellnesscorner.com/'
