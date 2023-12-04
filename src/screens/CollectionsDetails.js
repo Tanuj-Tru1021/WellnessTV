@@ -33,7 +33,7 @@ const CollectionsDetails = ({ route, navigation }) => {
             </View>
           )}
           renderItem={({ item }) => {
-            return (
+            (
               <TouchableOpacity
                 style={{ margin: 8, borderWidth: 2, borderColor: 'lightgrey' }}
                 onPress={() => navigation.navigate('VideoDetails', {

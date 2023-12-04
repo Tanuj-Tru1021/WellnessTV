@@ -14,17 +14,10 @@ const WellnessTV = ({ navigation }) => {
 
   const fetchAPI = async () => {
 
-    const token = await AsyncStorage.getItem('token')
-    const legacyToken = await AsyncStorage.getItem('legacyToken')
-
     await makeRequest({
       endPoint: 'wellness-tv/collections',
       method: 'GET',
       body: {},
-      headers: {
-        'x-access-token': token,
-        'Authorization': `Bearer ${legacyToken}`
-      },
       onSuccess: (data) => {
         setItem(data)
       },
@@ -36,10 +29,6 @@ const WellnessTV = ({ navigation }) => {
       endPoint: 'wellness-tv/categories',
       method: 'GET',
       body: {},
-      headers: {
-        'x-access-token': token,
-        'Authorization': `Bearer ${legacyToken}`
-      },
       onSuccess: (data) => {
         setCategory(data)
       },
@@ -70,9 +59,8 @@ const WellnessTV = ({ navigation }) => {
         <FlatList
           data={category.items}
           showsVerticalScrollIndicator={false}
-          key={'_'}
           style={{ paddingTop: 16 }}
-          keyExtractor={item => '_' + item.sys.id}
+          keyExtractor={item => item.sys.id}
           numColumns={2}
           ListHeaderComponent={(
             <View style={{ marginHorizontal: 8 }}>
@@ -90,16 +78,12 @@ const WellnessTV = ({ navigation }) => {
               </Text>
             </View>
           )}
-          renderItem={({ item }) => {
-            return (
-              <View style={{ width: '50%' }}>
-                <CategoryCards
-                  onPressImage={() => navigation.navigate('VideoList', { name: item.fields.name })}
-                  src={item.fields.image.fields.file.url}
-                />
-              </View>
-            )
-          }}
+          renderItem={({ item }) => (
+            <CategoryCards
+              onPressImage={() => navigation.navigate('VideoList', { name: item.fields.name })}
+              src={item.fields.image.fields.file.url}
+            />
+          )}
           ListEmptyComponent={(
             <View style={{ marginTop: 16, padding: 8 }}>
               <ActivityIndicator size={'large'} color={'black'} />
@@ -124,14 +108,12 @@ const WellnessTV = ({ navigation }) => {
                   </Text>
                 </View>
               )}
-              renderItem={({ item }) => {
-                return (
-                  <CollectionsCard
-                    onPressImage={() => navigation.navigate('CollectionsDetails', { collections: item.fields })}
-                    src={item.fields.image.fields.file.url}
-                  />
-                )
-              }}
+              renderItem={({ item }) => (
+                <CollectionsCard
+                  onPressImage={() => navigation.navigate('CollectionsDetails', { collections: item.fields })}
+                  src={item.fields.image.fields.file.url}
+                />
+              )}
               ListEmptyComponent={(
                 <View style={{ padding: 8, marginTop: 16 }}>
                   <ActivityIndicator size={'large'} color={'black'} />

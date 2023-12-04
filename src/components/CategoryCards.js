@@ -6,12 +6,12 @@ const CategoryCards = ({ src, onPressImage }) => {
     let imageURL = 'https:' + src
     return (
         <TouchableOpacity
-            style={{ backgroundColor: 'white', margin: 8 }}
+            style={{ flex: 1, backgroundColor: 'white', margin: 8 }}
             onPress={onPressImage}
         >
             <Image
                 src={imageURL}
-                style={{ height: 190, borderRadius: 15 }}
+                style={{ aspectRatio: 7 / 6, borderRadius: 15 }}
             />
         </TouchableOpacity>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar } from 'react-native'
+import { StatusBar, SafeAreaView } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Login from './screens/Login'
@@ -18,19 +18,21 @@ const Navigator = () => {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor='#34bbba' />
-      <Stack.Navigator screenOptions={{
-        headerShown: false
-      }}>
-        <Stack.Screen name='Splash' component={Splash} />
-        <Stack.Screen name='Login' component={Login} />
-        <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='WellnessTV' component={WellnessTV} />
-        <Stack.Screen name='CollectionsDetails' component={CollectionsDetails} />
-        <Stack.Screen name='VideoList' component={VideoList} />
-        <Stack.Screen name='VideoDetails' component={VideoDetails} />
-        <Stack.Screen name='VideoPlayer' component={VideoPlayer} />
-        <Stack.Screen name="ActivityFeed" component={ActivityFeed} />
-      </Stack.Navigator>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Stack.Navigator screenOptions={{
+          headerShown: false
+        }}>
+          <Stack.Screen name='Splash' component={Splash} />
+          <Stack.Screen name='Login' component={Login} />
+          <Stack.Screen name='Home' component={Home} />
+          <Stack.Screen name='WellnessTV' component={WellnessTV} />
+          <Stack.Screen name='CollectionsDetails' component={CollectionsDetails} />
+          <Stack.Screen name='VideoList' component={VideoList} />
+          <Stack.Screen name='VideoDetails' component={VideoDetails} />
+          <Stack.Screen name='VideoPlayer' component={VideoPlayer} />
+          <Stack.Screen name="ActivityFeed" component={ActivityFeed} />
+        </Stack.Navigator>
+      </SafeAreaView>
     </NavigationContainer>
   )
 }

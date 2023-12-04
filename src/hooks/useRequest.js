@@ -1,15 +1,23 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/Util";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default () => {
     const makeRequest = async ({ endPoint, method, body, headers, onSuccess, onError }) => {
+
+        const token = await AsyncStorage.getItem('token')
+        const legacyToken = await AsyncStorage.getItem('legacyToken')
+        const defaultHeaders = {
+            'x-access-token': token,
+            'Authorization': `Bearer ${legacyToken}`
+        }
         try {
             const request = {
                 method: method,
                 url: BASE_URL + endPoint,
                 data: body,
                 headers: {
-                    headers
+                    defaultHeaders, ...headers
                 }
             }
             const response = await axios(request)
