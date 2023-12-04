@@ -99,11 +99,11 @@ const WellnessTV = ({ navigation }) => {
                 <View style={{ margin: 8 }}>
                   <Text style={{
                     fontSize: 20, fontWeight: 500,
-                    color: 'black', marginTop: 8, marginBottom: 4
+                    color: 'black', marginTop: 8
                   }}>
                     Explore Collections
                   </Text>
-                  <Text style={{ fontSize: 16, fontWeight: 400, color: 'black' }}>
+                  <Text style={{ fontSize: 16, fontWeight: 400, color: 'black', marginTop: 4 }}>
                     Explore all collections of workouts & meditations curated by our community of health experts
                   </Text>
                 </View>

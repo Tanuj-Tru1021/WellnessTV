@@ -23,7 +23,7 @@ const CollectionsDetails = ({ route, navigation }) => {
             <View>
               <Image
                 src={imageURL}
-                style={{ height: 350, width: '100%' }}
+                style={{ aspectRatio: 7 / 6 }}
               />
               <View style={{ marginVertical: 12, marginHorizontal: 8 }}>
                 <Text style={{ fontSize: 14, fontWeight: 400, color: 'black' }}>
@@ -32,36 +32,35 @@ const CollectionsDetails = ({ route, navigation }) => {
               </View>
             </View>
           )}
-          renderItem={({ item }) => {
-            (
-              <TouchableOpacity
-                style={{ margin: 8, borderWidth: 2, borderColor: 'lightgrey' }}
-                onPress={() => navigation.navigate('VideoDetails', {
-                  name: item.fields.title,
-                  imageURL: item.fields.image.fields.file.url,
-                  description: item.fields.description,
-                  videoURL: item.fields.url
-                })}
-              >
-                <Image
-                  src={'https:' + item.fields.image.fields.file.url}
-                  style={{ height: 300, width: '100%' }}
-                />
-                <Text style={{
-                  fontSize: 20, fontWeight: 500,
-                  color: 'black', margin: 4
-                }}>
-                  {item.fields.title}
-                </Text>
-                <Text style={{
-                  fontSize: 14, fontWeight: 400,
-                  color: 'black', marginHorizontal: 4, marginBottom: 8
-                }}>
-                  {item.fields.description}
-                </Text>
-              </TouchableOpacity>
-            )
-          }}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={{ margin: 8, borderWidth: 2, borderColor: 'lightgrey' }}
+              onPress={() => navigation.navigate('VideoDetails', {
+                name: item.fields.title,
+                imageURL: item.fields.image.fields.file.url,
+                description: item.fields.description,
+                videoURL: item.fields.url
+              })}
+            >
+              <Image
+                src={'https:' + item.fields.image.fields.file.url}
+                style={{ aspectRatio: 16 / 9 }}
+              />
+              <Text style={{
+                fontSize: 20, fontWeight: 500,
+                color: 'black', margin: 4
+              }}>
+                {item.fields.title}
+              </Text>
+              <Text style={{
+                fontSize: 14, fontWeight: 400,
+                color: 'black', marginHorizontal: 4, marginBottom: 8
+              }}>
+                {item.fields.description}
+              </Text>
+            </TouchableOpacity>
+          )
+          }
         />
       </View>
     </View>

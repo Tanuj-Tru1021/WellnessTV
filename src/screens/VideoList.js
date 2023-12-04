@@ -40,7 +40,7 @@ const VideoList = ({ route, navigation }) => {
                     data={category}
                     keyExtractor={item => item.sys.id}
                     showsVerticalScrollIndicator={false}
-                    style={{ marginBottom: 50, paddingTop: 16 }}
+                    style={{ marginBottom: 60, paddingTop: 16 }}
                     renderItem={({ item }) => (
                         <TouchableOpacity
                             style={{
@@ -56,7 +56,7 @@ const VideoList = ({ route, navigation }) => {
                         >
                             <Image
                                 src={"https:" + item.fields.image.fields.file.url}
-                                style={{ height: 300, width: '100%' }}
+                                style={{ aspectRatio: 16 / 9 }}
                             />
                             <Text style={{
                                 margin: 8, fontSize: 20,
@@ -65,7 +65,7 @@ const VideoList = ({ route, navigation }) => {
                                 {item.fields.title}
                             </Text>
                             <Text style={{
-                                marginHorizontal: 8, marginBottom: 16,
+                                marginHorizontal: 8, marginBottom: 8,
                                 fontSize: 14, fontWeight: 400, color: 'black'
                             }}>
                                 {item.fields.description}

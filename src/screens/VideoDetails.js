@@ -17,7 +17,7 @@ const VideoDetails = ({ route, navigation }) => {
                 <View>
                     <Image
                         src={imageUrl}
-                        style={{ height: 350, width: '100%' }}
+                        style={{ aspectRatio: 16 / 9 }}
                     />
                     <View style={{ margin: 16 }}>
                         <Text style={{
